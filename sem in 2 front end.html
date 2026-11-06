@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Conditional Rendering - Price Discount</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    input {
+      padding: 8px;
+      font-size: 16px;
+      width: 120px;
+      text-align: center;
+    }
+    .discount { color: green; font-weight: bold; }
+    .no-discount { color: crimson; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Price: ₹<span id="priceText">1200</span></h2>
+    <p id="message"></p>
+    <label>Change price: <input type="number" id="priceInput" value="1200" /></label>
+  </div>
+
+  <script>
+    let price = 1200;
+
+    function render() {
+      document.getElementById("priceText").textContent = price;
+      const message = document.getElementById("message");
+
+      // Conditional rendering
+      if (price > 1000) {
+        message.textContent = "10% discount applied";
+        message.className = "discount";
+      } else {
+        message.textContent = "No discount";
+        message.className = "no-discount";
+      }
+    }
+
+    document.getElementById("priceInput").addEventListener("input", (e) => {
+      price = Number(e.target.value);
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>
